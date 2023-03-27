@@ -56,5 +56,5 @@ Here are explanations of the specified options :
 
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/40942166/228029592-8d3330da-c61e-4386-8f95-07dde5c28b68.png" width=50% height=50%>
+<img src="https://user-images.githubusercontent.com/40942166/228029592-8d3330da-c61e-4386-8f95-07dde5c28b68.png">
 </p>
