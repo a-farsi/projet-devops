@@ -12,7 +12,7 @@ Our web application is developped in Python and use the Flask module to be execu
 6. Launch the **app.py** application in **ENTRYPOINT** using the command **python**.
 
 The propose Dockerfile will be as follows : 
----
+####
 # Utilisez une image Python pour exécuter l'application
 FROM python:3.6-alpine
 
@@ -34,4 +34,4 @@ EXPOSE 8080
 
 # Démarrez l'application web vitrine]
 ENTRYPOINT ["python", "app.py"]
----
+####
