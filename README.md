@@ -54,3 +54,6 @@ Here are explanations of the specified options :
 - The option **--rm** to delete it when it's stoped.
 - The option **-p 8080:8080** to expose the container's port to be reached by external requests.
 
+<p>
+![photo](https://user-images.githubusercontent.com/40942166/228029592-8d3330da-c61e-4386-8f95-07dde5c28b68.png)
+</p>
