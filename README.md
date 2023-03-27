@@ -13,25 +13,32 @@ Our web application is developped in Python and use the Flask module to be execu
 
 The propose Dockerfile will be as follows : 
 ```
-# Utilisez une image Python pour exécuter l'application
+# Use this base image to execute the application
 FROM python:3.6-alpine
 
-# Copier les fichiers de l'application vers l'image
-
+# Specify the working directory
 WORKDIR /opt
 
+# Update and install Git to get the application's source code from github 
 RUN apk update
 RUN apk add git
 RUN git clone https://github.com/sadofrazer/ic-webapp.git /opt/ 
 
+# Install the Flask module 
 RUN pip install flask==1.1.2
 
-# Définir les variables d'environnement pour les URL Odoo et pgAdmin
+# Define the environment variables to set urls of Odoo and pgAdmin applications
 ENV ODOO_URL=http://www.odoo.com
 ENV PGADMIN_URL=http://www.pgadmin.org
 
+# Expose the default port
 EXPOSE 8080
 
-# Démarrez l'application web vitrine]
+# Launch the application
 ENTRYPOINT ["python", "app.py"]
+```
+From this Docker file we can generate the image **ic-webapp** with a tag **1.0** by executong the following vommand : 
+
+```
+ docker build -t ic-webapp:1.0 .
 ```
