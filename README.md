@@ -54,11 +54,67 @@ Here are explanations of the specified options :
 - The option **--rm** to delete it when it's stoped.
 - The option **-p 8080:8080** to expose the container's port to be reached by external requests.
 
+Let's ignore the **-d** option to get more details about the container. The figure bellow illutrate the output of the command line:   
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/40942166/228029592-8d3330da-c61e-4386-8f95-07dde5c28b68.png">
 </p>
 
+We can see that's the container is launched on the url : http://172.17.0.2:8080.
+
+We launch an internet navigator and type this url to get the application displayed as shown in the following figure :
+
 <p align="center">
 <img src="https://user-images.githubusercontent.com/40942166/228032519-f4620e02-fbbe-4746-817d-1ee6ccf59157.png">
 </p>
+
+We delete our container either : 
+- Automaticaly by using the option **--rm** and weill be deleted when it's stopped.
+- Or by executing the following command : 
+
+```
+ docker docker rm <DOCKER_NAME>
+```
+In our case <DOCKER_NAME> should be replace by **test-ic-webapp**
+
+
+To push our image on the Docker Hub, we first need to tag it 
+
+login 
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/40942166/228038534-6ed7d02c-fc83-4b33-9880-f3a4589162a8.png">
+</p>
+
+
+tag : 
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/40942166/228038662-d813cb6d-647b-4e79-97d1-93ec953b131a.png">
+</p>
+
+
+images : 
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/40942166/228039608-84ee9c3f-d143-4410-bea6-2ae9510eee4a.png">
+</p>
+
+
+
+push : 
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/40942166/228039477-722045e5-7ca8-430d-a211-a4d174784463.png">
+</p>
+
+
+Image sur Docker Hub :
+<p align="center">
+<img src="https://user-images.githubusercontent.com/40942166/228039095-2c4efb88-7a82-42fd-a0ba-083f62c887c7.png">
+</p>
+
+
+
+
+
