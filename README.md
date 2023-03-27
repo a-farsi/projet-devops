@@ -37,8 +37,20 @@ EXPOSE 8080
 # Launch the application
 ENTRYPOINT ["python", "app.py"]
 ```
-From this Docker file we can generate the image **ic-webapp** with a tag **1.0** by executong the following vommand : 
+From this Dockerfile we can generate the image **ic-webapp** with a tag **1.0** by executong the following vommand : 
 
 ```
  docker build -t ic-webapp:1.0 .
 ```
+Then we can launch our container by executing the previous generated image using this command :
+
+```
+ docker run --name test-ic-webapp -d --rm -p 8080:8080 ic-webapp:1.0
+```
+Here are explanations of the specified options : 
+
+The **--name test-ic-webapp** allows to rename the generated container
+the **-d **option to launch is in detached mode
+**--rm** to delete it when it's stoped
+**-p 8080:8080** to expose the container's port to be reached by external requests
+
