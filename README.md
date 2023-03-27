@@ -60,16 +60,30 @@ Let's ignore the **-d** option to get more details about the container. The figu
 <img src="https://user-images.githubusercontent.com/40942166/228029592-8d3330da-c61e-4386-8f95-07dde5c28b68.png">
 </p>
 
-We can see that's the container is launched on the url : http://172.17.0.2:8080.
+We can see that's the container is launched on the url : http://172.17.0.2:8080. In fact, this ip address corresponds to the address assigned to the Docker container, and in practice, it should never be used to reach the container from outside. The practical alternative is to use the host ip address with the mapped port.
 
-We launch an internet navigator and type this url to get the application displayed as shown in the following figure :
+To get the docker host ip address we execute the commande:
+
+```
+ip a
+```
+We get our ip adress (the one in the red box)
+
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/40942166/228032519-f4620e02-fbbe-4746-817d-1ee6ccf59157.png">
+<img src="https://user-images.githubusercontent.com/40942166/228523668-bb6077c8-f495-4750-8d3f-2fc15486dd20.png">
+</p>
+
+
+
+We launch an internet navigator and type the url (composed of the docker host ip address and the docker host port) to get the application displayed as shown in the following figure :
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/40942166/228526110-b4740ffe-7ca2-4d85-9283-2a1369a34394.png">
 </p>
 
 We delete our container either : 
-- Automaticaly by using the option **--rm** and weill be deleted when it's stopped.
+- Automaticaly by using the option **--rm**, when it's stopped.
 - Or by executing the following command : 
 
 ```
@@ -78,36 +92,50 @@ We delete our container either :
 In our case <DOCKER_NAME> should be replace by **test-ic-webapp**
 
 
-To push our image on the Docker Hub, we first need to tag it 
+To push our image on the Docker Hub, we first follow the following steps : 
 
-login 
+We login on our docker-hub account by typing the following command : 
 
+```
+ docker login
+```
+This figure shows that we connected to our docker-hub account successfylly. 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/40942166/228038534-6ed7d02c-fc83-4b33-9880-f3a4589162a8.png">
 </p>
 
+Then, we tag our image as follows : 
 
-tag : 
+```
+ docker tag ic-webapp:1:0 afarsi/ic-webapp:1:0
+```
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/40942166/228038662-d813cb6d-647b-4e79-97d1-93ec953b131a.png">
 </p>
 
+To display all docker images and check that our taged image has already been created, we execute the command : 
 
-images : 
+```
+ docker images
+```
+And this figure shows that the **afarsi/ic-webapp:1:0** image with other existing ones 
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/40942166/228039608-84ee9c3f-d143-4410-bea6-2ae9510eee4a.png">
 </p>
 
+After that, we push our  taged image to the docker-hub account. To do that we type the command : 
 
-
-push : 
-
+```
+ docker push afarsi/ic-webapp:1:0
+```
+Here is the result of pushing our images on docker-hub :
 <p align="center">
 <img src="https://user-images.githubusercontent.com/40942166/228039477-722045e5-7ca8-430d-a211-a4d174784463.png">
 </p>
 
+We connect through an internet navigator to our Docker hub account in order to check that our images is present as shown by this figgure: 
 
 Image sur Docker Hub :
 <p align="center">
