@@ -49,8 +49,8 @@ Then we can launch our container by executing the previous generated image using
 ```
 Here are explanations of the specified options : 
 
-The **--name test-ic-webapp** allows to rename the generated container
-the **-d **option to launch is in detached mode
-**--rm** to delete it when it's stoped
-**-p 8080:8080** to expose the container's port to be reached by external requests
+a. The **--name test-ic-webapp** allows to rename the generated container
+b. the **-d **option to launch is in detached mode
+c. **--rm** to delete it when it's stoped
+d. **-p 8080:8080** to expose the container's port to be reached by external requests
 
