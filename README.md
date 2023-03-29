@@ -1,7 +1,7 @@
 # projet-devops
 Please find the project statement by clicking on this link : ![https://github.com/sadofrazer/ic-webapp](https://github.com/sadofrazer/ic-webapp)
 
-# 2) Containerizing of the web application. 
+# 2.a) Containerizing of the web application. 
 Our web application is developped in Python and use the Flask module to be executed. Here are the steps to follow in order to containerize the web application: 
 
 1. Use the base image **python:3.6-alpine** for building the new image
@@ -142,7 +142,97 @@ Image sur Docker Hub :
 <img src="https://user-images.githubusercontent.com/40942166/228039095-2c4efb88-7a82-42fd-a0ba-083f62c887c7.png">
 </p>
 
+# 2.b) Containerizing of web application, oodo and pgAdmin. 
+
+In this section we will containerize the three application : ic-webapp, oodo and pgAdmin.
+We'll allow to a user to access to both oodo and pgAdmin from the fronted by clicking on their images.
+
+We should modify the environment variables to point to the service instead of the publlic url as shown in the Dockerfile bellow :
+
+```
+# Utilisez une image Python pour exécuter l'application
+FROM python:3.6-alpine
+
+# Copier les fichiers de l'application vers l'image
+
+WORKDIR /opt
+
+RUN apk update
+RUN apk add git
+RUN git clone https://github.com/sadofrazer/ic-webapp.git /opt/ 
+
+RUN pip install flask==1.1.2
+
+# Définir les variables d'environnement pour les URL Odoo et pgAdmi
+ENV ODOO_URL=odoo:8069
+ENV PGADMIN_URL=pgadmin:5050
+
+EXPOSE 8080
+
+# Démarrez l'application web vitrine]
+ENTRYPOINT ["python", "app.py"]
+
+```
+
+Here is the docker-compose file : 
+
+```
+version: "3.9"
+
+services:
+  ic-webapp:
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - webapp_network
+
+  odoo13:
+    container_name: odoo13
+    image: odoo:13
+    networks:
+      - webapp_network
+    tty: true
+    command: -- --dev=reload
+    volumes:
+      - ./addons:/mnt/extra-addons
+      - ./etc:/etc/odoo
+    restart: always
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - webapp_network
+    restart: always
+    
+networks:
+  webapp_network:
+    driver: bridge
 
 
+```
+We launch the docker compose by typing the following command : 
+
+```
+docker compose up -d
+```
+We will get the same render as in the figure above. But when we click on the oddo icon, we are directed to the oddo service this times  
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/40942166/228629323-e927b6a0-d2bc-4aa4-839c-e1dfc698bf1a.png">
+</p>
+
+The same thing for the pgAdmin service 
+
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/40942166/228629496-843485ae-f2b5-4a10-83ec-7d0b3cf77156.png">
+</p>
+
+We see this time that url contains the service name instead of the public url.
 
 

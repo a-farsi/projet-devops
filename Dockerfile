@@ -12,8 +12,10 @@ RUN git clone https://github.com/sadofrazer/ic-webapp.git /opt/
 RUN pip install flask==1.1.2
 
 # Définir les variables d'environnement pour les URL Odoo et pgAdmin
-ENV ODOO_URL=http://www.odoo.com
-ENV PGADMIN_URL=http://www.pgadmin.org
+#ENV ODOO_URL=http://www.odoo.com
+ENV ODOO_URL=odoo:8069
+#ENV PGADMIN_URL=http://www.pgadmin.org
+ENV PGADMIN_URL=pgadmin:5050
 
 EXPOSE 8080
 

@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  ic-webapp:
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - webapp_network
+
+  odoo13:
+    container_name: odoo13
+    image: odoo:13
+    networks:
+      - webapp_network
+    tty: true
+    command: -- --dev=reload
+    volumes:
+      - ./addons:/mnt/extra-addons
+      - ./etc:/etc/odoo
+    restart: always
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    networks:
+      - webapp_network
+    restart: unless-stopped
+    
+networks:
+  webapp_network:
+    driver: bridge
